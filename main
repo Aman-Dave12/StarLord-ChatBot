@@ -1,0 +1,75 @@
+#A list of questions that may be recognized by the Chatbot
+LISTOFQUESTIONS = [
+    "Hi", "What are you?", "How are you?", "What did you do?",
+    "Who is your favorite Guardians of the Galaxy Character?",
+    "Who is your least favorite Guardians of the Galaxy Character?",
+    "What was your death count in Guardians of the Galaxy?",
+    "Who did the most in Guardians of the Galaxy?",
+    "When did Guardians of the Galaxy come out?",
+    "Who is the richest Guardians of the Galaxy character?",
+    "Why are you named Star Lord?",
+    "What was the inspiration behind Guardians of the Galaxy?"
+]
+
+#A list of responses that Chatbot responds with, matching indexes with each question
+LISTOFRESPONSES = [
+    "    Hello! What questions would you like to ask me?",
+    """    I am a fictional character appearing in American Comic Books. 
+    I am a Celestial Hybrid that my father created as a means to 
+    terraform planets.""",
+    """    I am feeling fine, reporting to my duties of guarding 
+    galaxies, as usual!""",
+    """    Some of my accomplishments include being elected leader of Spartax,
+    besting Thanos, forming the Guardians of the Galaxy, and helping defeat      
+    Annihilus.""", """    Oh, it's got to be Rocket.""",
+    """    Unfortunately, I think it's my own dad. Our relationship began well
+    , but I eventually saw his dark intentions through actions such as 
+    killing my mother.""", """    I have killed around 350,000 beings.""",
+    """    As the leader of the Guardians of the Galaxy, I would say I have 
+    done the most.""", """    The release date was August 1st, 2014.""",
+    """    Chriss Pratt (who I am acted by) is the richest Guardians of the 
+    Galaxy character.""",
+    """    It's a nickname my mom used to call me, and it has stuck around 
+    ever since.""",
+    """    Guardians of the Galaxy was inspired by the TV series 'Farscape', 
+    as you can see through their many uncanny similarities."""
+]
+
+
+#Recieves input from the user and returns the index of the question, but also having a
+#failsafe and a "break" index
+def question_response():
+  question = input("\n    Talk with me! type 'quit' to exit! ")
+  print()
+
+  correctIndex = validate_question(question)
+  return correctIndex
+
+
+#returns a value that indicates whether the question is in the list, a quit value,
+#or a question the bot is not coded for
+def validate_question(question):
+  validate_val = 0
+  for i in range(len(LISTOFQUESTIONS)):
+    if question.lower() == LISTOFQUESTIONS[i].lower():
+      validate_val = i
+      break
+    elif question.lower() == "quit":
+      validate_val = -1
+    else:
+      validate_val = -2
+
+  return validate_val
+
+
+#keeps the user in a loop of asking questions until they choose to break
+while True:
+  return_val = question_response()
+  if return_val == -1:
+    break
+  elif return_val == -2:
+    print("    Dumb Question! Please try again!")
+  else:
+    print(LISTOFRESPONSES[return_val])
+
+print("    Good talking with you! ")
